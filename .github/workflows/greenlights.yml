@@ -26,7 +26,7 @@ jobs:
           if [ "$(date +%u)" -eq 1 ]; then
             echo "# Week of $(date +%F)" > .upflow.txt
             git add .upflow.txt
-            git commit -m "New greenlights 🌱 - $(date +%F)"
+            git commit -m "New Greenlights 🌱 - $(date +%F)"
           fi
 
           COMMITS=$(( ( RANDOM % 5 )  + 1 ))
