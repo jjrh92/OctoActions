@@ -18,10 +18,13 @@ jobs:
           git config user.name "Julio Reyes"
           git config user.email "juliojesusreyes@gmail.com"
 
-      - name: Random green lights
+      - name: Generar commits
         run: |
+          # Si es lunes, reiniciar el archivo y hacer un commit especial
           if [ "$(date +%u)" -eq 1 ]; then
-            echo "" > .upflow.txt
+            echo "# Week of $(date +%F)" > .upflow.txt
+            git add .upflow.txt
+            git commit -m "New greenlights 🌱 - $(date +%F)"
           fi
 
           COMMITS=$(( ( RANDOM % 5 )  + 1 ))
@@ -31,6 +34,9 @@ jobs:
             git commit -m "Green light $i - $(date +%F_%T)"
           done
 
-      - name: Push
+      - name: Token Push
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
           git push
