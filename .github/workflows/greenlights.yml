@@ -3,8 +3,7 @@ name: Greenlights
 on:
   schedule:
     - cron: '37 5 * * *'
-
-  workflow_dispatch:     # Permite correrlo manualmente
+  workflow_dispatch:
 
 jobs:
   greenlights:
@@ -21,11 +20,15 @@ jobs:
 
       - name: Random green lights
         run: |
+          if [ "$(date +%u)" -eq 1 ]; then
+            echo "" > .upflow.txt
+          fi
+
           COMMITS=$(( ( RANDOM % 5 )  + 1 ))
           for i in $(seq 1 $COMMITS); do
             echo "Commit $i - $(date)" >> .upflow.txt
             git add .upflow.txt
-            git commit -m "Green Light $i - $(date +%F_%T)"
+            git commit -m "Green light $i - $(date +%F_%T)"
           done
 
       - name: Push
