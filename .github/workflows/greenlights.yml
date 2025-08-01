@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar el repo
+      - name: Clonar el repo sin credenciales
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Configurar git
         run: |
@@ -20,7 +22,6 @@ jobs:
 
       - name: Generar commits
         run: |
-          # Si es lunes, reiniciar el archivo y hacer un commit especial
           if [ "$(date +%u)" -eq 1 ]; then
             echo "# Week of $(date +%F)" > .upflow.txt
             git add .upflow.txt
@@ -34,7 +35,7 @@ jobs:
             git commit -m "Green light $i - $(date +%F_%T)"
           done
 
-      - name: Token Push
+      - name: Push con token
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
