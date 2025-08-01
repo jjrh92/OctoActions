@@ -31,7 +31,7 @@ jobs:
 
           COMMITS=$(( ( RANDOM % 5 )  + 1 ))
           for i in $(seq 1 $COMMITS); do
-            echo "Commit $i - $(date)" >> .upflow.txt
+            echo "GreenLight $i - $(date)" >> .upflow.txt
             git add .upflow.txt
             git commit -m "GreenLight $i - $(date +%F_%T)"
           done
