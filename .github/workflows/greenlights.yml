@@ -10,18 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar el repo sin credenciales
+      - name: Clonar el repositorio
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Configurar git
+      - name: Configurar git con credenciales propias
         run: |
           git config user.name "Julio Reyes"
           git config user.email "juliojesusreyes@gmail.com"
 
-      - name: Generar commits
+      - name: greenlights
         run: |
           if [ "$(date +%u)" -eq 1 ]; then
             echo "# Week of $(date +%F)" > .upflow.txt
@@ -36,7 +36,7 @@ jobs:
             git commit -m "GreenLight $i - $(date +%F_%T)"
           done
 
-      - name: Push con PAT token
+      - name: Pushing changes
         env:
           TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
