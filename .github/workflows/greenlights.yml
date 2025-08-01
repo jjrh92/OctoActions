@@ -1,0 +1,33 @@
+name: Greenlights
+
+on:
+  schedule:
+    - cron: '37 5 * * *'
+
+  workflow_dispatch:     # Permite correrlo manualmente
+
+jobs:
+  greenlights:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repo
+        uses: actions/checkout@v4
+
+      - name: Configurar git
+        run: |
+          git config user.name "Julio Reyes"
+          git config user.email "juliojesusreyes@gmail.com"
+
+      - name: Random green lights
+        run: |
+          COMMITS=$(( ( RANDOM % 5 )  + 1 ))
+          for i in $(seq 1 $COMMITS); do
+            echo "Commit $i - $(date)" >> .upflow.txt
+            git add .upflow.txt
+            git commit -m "Green Light $i - $(date +%F_%T)"
+          done
+
+      - name: Push
+        run: |
+          git push
