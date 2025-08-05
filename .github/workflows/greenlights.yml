@@ -29,11 +29,12 @@ jobs:
             git commit -m "New Greenlights 🌱 - $(date +%F)"
           fi
 
-          COMMITS=$(( ( RANDOM % 5 )  + 1 ))
+          COMMITS=$(( ( RANDOM % 31 ) + 7 ))
           for i in $(seq 1 $COMMITS); do
             echo "GreenLight $i - $(date)" >> .upflow.txt
             git add .upflow.txt
             git commit -m "GreenLight $i - $(date +%F_%T)"
+            sleep $(( RANDOM % 2 + 1 ))
           done
 
       - name: Pushing changes
