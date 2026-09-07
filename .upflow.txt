@@ -10,3 +10,4 @@ GreenLight 8 - Mon Sep  7 10:40:42 UTC 2026
 GreenLight 9 - Mon Sep  7 10:40:44 UTC 2026
 GreenLight 10 - Mon Sep  7 10:40:46 UTC 2026
 GreenLight 11 - Mon Sep  7 10:40:48 UTC 2026
+GreenLight 12 - Mon Sep  7 10:40:50 UTC 2026
